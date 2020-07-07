@@ -32,6 +32,7 @@ foreach ($files1 as $directory)
 			echo $filename . "\n";
 			if (preg_match('/\.html$/', $filename))
 			{
+				$base_filename = str_replace('.html', '', $filename);
 			
 				$html = file_get_contents($sourcedir . '/' . $directory . '/' . $filename);
 			
@@ -61,6 +62,16 @@ foreach ($files1 as $directory)
 				
 				print_r($references);
 				
+				$text = join("\n",$references);
+				
+				$textfilename = $sourcedir . '/' . $directory . '/' . $base_filename . '.txt';
+				$jsonfilename = $sourcedir . '/' . $directory . '/' . $base_filename . '.json';
+				
+				file_put_contents($textfilename, $text);
+				
+				$command = 'anystyle -f csl parse ' . $textfilename . ' > ' . $jsonfilename;
+				system($command);
+				
 			
 
 			}
@@ -68,70 +79,6 @@ foreach ($files1 as $directory)
 	}
 }
 
-/*
 
-foreach ($files as $filename)
-{
-	// echo "filename=$filename\n";
-	
-	if (preg_match('/\.html$/', $filename))
-	{	
-		$html = file_get_contents($sourcedir . '/' . $filename);
-		
-		$dom = HtmlDomParser::str_get_html($html);
-		
-		foreach ($dom->find('div[class=tocTitle] a') as $a)
-		{
-			echo $a->href . "\n";
-			
-			$url = $a->href;
-			
-			$filename = str_replace('https://www.mapress.com/j/zt/article/view/zootaxa.', '', $url);
-			$filename .= '.html';
-			
-			if (preg_match('/^(?<volume>\d+)\./', $filename, $m))
-			{
-				$volume = $m['volume'];
-				
-				// folder for volume
-				
-				$dir = $basedir . '/' . $volume ;
-				if (!file_exists($dir))
-				{
-					$oldumask = umask(0); 
-					mkdir($dir, 0777);
-					umask($oldumask);
-				}
-	
-				$filename = $dir . '/' . $filename;
-				
-				$article = get($url);
-			
-				file_put_contents($filename, $article);
-			
-				// Give server a break every 10 items
-				if (($count++ % 10) == 0)
-				{
-					$rand = rand(1000000, 3000000);
-					echo "\n ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
-					usleep($rand);
-				}
-				
-				
-			}
-			else
-			{
-				echo "Problem\n";
-				exit();
-			}
-	
-			
-		}
-		
-	}
-
-}
-*/
-		
 ?>
 

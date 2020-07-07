@@ -1,0 +1,170 @@
+[
+  {
+    "author": [
+      {
+        "family": "Evenhuis",
+        "given": "N.L."
+      },
+      {
+        "family": "Greathead",
+        "given": "D.J."
+      }
+    ],
+    "title": "World catalog of bee flies",
+    "publisher": "Bombyliidae). Backhuys Publishers, Leiden",
+    "type": "book",
+    "issued": "1999",
+    "page": "756",
+    "publisher-place": "Diptera"
+  },
+  {
+    "author": [
+      {
+        "family": "Gharali",
+        "given": "B."
+      },
+      {
+        "family": "Khamali",
+        "given": "K."
+      },
+      {
+        "family": "Evenhuis",
+        "given": "N.L."
+      },
+      {
+        "family": "Talebi",
+        "given": "A.A."
+      }
+    ],
+    "title": "Two new species of the genus Apolysis (Apolysini, Bombyliidae, Diptera) from the north of Iran",
+    "volume": "2441",
+    "type": "article-journal",
+    "container-title": "Zootaxa",
+    "issued": "2010",
+    "page": "41–52"
+  },
+  {
+    "author": [
+      {
+        "family": "Greathead",
+        "given": "D.J."
+      },
+      {
+        "family": "Evenhuis",
+        "given": "N.L."
+      }
+    ],
+    "title": "Family Bombyliidae",
+    "editor": [
+      {
+        "family": "Papp",
+        "given": "L."
+      },
+      {
+        "family": "Darvas",
+        "given": "B."
+      }
+    ],
+    "container-title": "Contribution to a manual of Palaearctic Diptera (with special reference to flies of economic importance",
+    "volume": "2",
+    "publisher": "Science Herald Press",
+    "type": "chapter",
+    "issued": "1997",
+    "page": "487–512",
+    "publisher-place": "Budapest"
+  },
+  {
+    "author": [
+      {
+        "family": "Latreille",
+        "given": "P.A."
+      }
+    ],
+    "title": "Histoire naturelle, générale et particulière, des crustacés et des insectes. Tome troisième. Familles naturelles des genres. Ouvrage faisant suite à l’histoire naturelle générale et particulière, composée par Leclerc de Buffon, et rédigée par C.S. Sonnini, membre de plusieurs sociétés savantes",
+    "genre": "Dufart, Paris. xii",
+    "type": null,
+    "issued": "1802",
+    "page": "13–467 1"
+  },
+  {
+    "author": [
+      {
+        "family": "Loew",
+        "given": "H."
+      }
+    ],
+    "title": "Bidrag till kännedomen om Afrikas Diptera [part",
+    "volume": "17",
+    "type": "article-journal",
+    "container-title": "Öfversigt af Kongl. Vetenskapsakademiens Förhandlingar",
+    "issued": "1860",
+    "page": "81–97"
+  },
+  {
+    "author": [
+      {
+        "family": "Paramonov",
+        "given": "S.J."
+      }
+    ],
+    "title": "Beiträge zur Monographie einiger Bombyliiden-Gattungen",
+    "volume": "11",
+    "type": "article-journal",
+    "container-title": "Diptera). Trudy Fizychno-Matematychnogo Viddil Ukrains’ka Akademiya Nauk",
+    "issue": "1",
+    "issued": "1929",
+    "page": "65–225"
+  },
+  {
+    "author": [
+      {
+        "family": "Yang",
+        "given": "C.K."
+      },
+      {
+        "family": "Yang",
+        "given": "D."
+      }
+    ],
+    "title": "Two new species of Usiinae (Diptera: Bombyliidae) from China",
+    "volume": "16",
+    "type": "article-journal",
+    "container-title": "Entomotaxonomia",
+    "issued": "1994",
+    "page": "272–274"
+  },
+  {
+    "author": [
+      {
+        "family": "Zaitzev",
+        "given": "V.F."
+      }
+    ],
+    "title": "On the fauna of bee flies (Diptera, Bombyliidae) of Mongolia III",
+    "editor": [
+      {
+        "family": "Kerzhner",
+        "given": "I.M."
+      },
+      {
+        "family": "Emelyanov",
+        "given": "A.F."
+      },
+      {
+        "family": "Kozlov",
+        "given": "M.A."
+      },
+      {
+        "family": "Chogsomzhav",
+        "given": "L."
+      }
+    ],
+    "container-title": "Insects of Mongolia",
+    "volume": "III",
+    "publisher": "Nauka",
+    "type": "chapter",
+    "issued": "1975",
+    "page": "546–556",
+    "publisher-place": "Leningrad"
+  }
+]
