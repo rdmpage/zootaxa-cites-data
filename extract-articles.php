@@ -1,5 +1,7 @@
 <?php
 
+// Process pages of contents and extract individual articles
+
 require_once(dirname(__FILE__) . '/lib.php');
 
 require_once 'vendor/autoload.php';
@@ -12,8 +14,8 @@ $sourcedir = dirname(__FILE__) . '/contents';
 $files = scandir($sourcedir);
 
 // debugging
-$files=array('2441.1.html');
-$files=array('4592.1.html');
+//$files=array('2441.1.html');
+//$files=array('4592.1.html');
 
 $count = 1;
 

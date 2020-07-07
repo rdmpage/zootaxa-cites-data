@@ -1,5 +1,7 @@
 <?php
 
+// Process issues web pages and extract links to list of contents for each issue
+
 require_once(dirname(__FILE__) . '/lib.php');
 
 require_once 'vendor/autoload.php';

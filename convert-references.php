@@ -1,6 +1,11 @@
 <?php
 
+// Convert extracted references to TSV file
+
 require_once(dirname(__FILE__) . '/lib.php');
+
+require_once 'vendor/autoload.php';
+use Sunra\PhpSimple\HtmlDomParser;
 
 
 $basedir = dirname(__FILE__) . '/articles';
@@ -15,7 +20,7 @@ $count = 1;
 
 $files1 = scandir($sourcedir);
 
-$keys = array('author', 'title', 'container-title', 'type', 'volume', 'issue', 'issued', 'page', 'publisher', 'publisher-place', 'editor', 'edition', 'genre', 'note', 'director', 'source', 'URL', 'DOI', 'PMID', 'PMCID');
+$keys = array('guid', 'author', 'title', 'container-title', 'type', 'volume', 'issue', 'issued', 'page', 'publisher', 'publisher-place', 'editor', 'edition', 'genre', 'note', 'director', 'source', 'URL', 'DOI', 'PMID', 'PMCID');
 
 echo join("\t", $keys) . "\n";
 
@@ -36,6 +41,39 @@ foreach ($files1 as $directory)
 			{
 				$base_filename = str_replace('.json', '', $filename);
 			
+				// Get DOI of article 
+				$guid = $base_filename;
+				
+				$html_filename = $base_filename . '.html';
+				
+				$html = file_get_contents($sourcedir . '/' . $directory . '/' . $html_filename);
+			
+				$dom = HtmlDomParser::str_get_html($html);
+				
+				$metas = $dom->find('meta');
+				
+				/*
+				foreach ($metas as $meta)
+				{
+					echo $meta->name . " " . $meta->content . "\n";
+				}
+				*/
+				
+
+				foreach ($metas as $meta)
+				{
+					switch ($meta->name)
+					{
+						case 'DC.Identifier.DOI':
+							$guid = $meta->content;
+							break;
+							
+						default:
+							break;
+					}
+				}
+			
+				// Get CSL JSON and convert to tab delimited row
 				$json = file_get_contents($sourcedir . '/' . $directory . '/' . $filename);
 				
 				$references = json_decode($json);
@@ -61,6 +99,10 @@ foreach ($files1 as $directory)
 						}					
 					
 						$values = array();
+						
+						// So we know who cites these papers
+						
+						$reference->guid = $guid;
 					
 						foreach ($keys as $k)
 						{

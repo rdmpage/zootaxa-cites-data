@@ -1,5 +1,9 @@
 /vendor/
 .DS_Store
 
+articles/*.html
+
+!articles/2441
+
 #contents/*.html
 

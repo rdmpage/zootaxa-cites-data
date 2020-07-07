@@ -1,5 +1,7 @@
 <?php
 
+// Fetch issues from OJS page for Zootaxa hosted by mapress.com
+
 require_once(dirname(__FILE__) . '/lib.php');
 
 $base_dir = dirname(__FILE__) . '/html';

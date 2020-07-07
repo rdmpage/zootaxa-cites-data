@@ -1,5 +1,7 @@
 <?php
 
+// Process individual article pages and extract list of references
+
 require_once(dirname(__FILE__) . '/lib.php');
 
 require_once 'vendor/autoload.php';
