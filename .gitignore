@@ -1,7 +1,7 @@
 /vendor/
 .DS_Store
 
-articles/*.html
+articles/
 
 !articles/2441
 
