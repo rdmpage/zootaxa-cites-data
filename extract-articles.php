@@ -16,6 +16,7 @@ $files = scandir($sourcedir);
 // debugging
 //$files=array('2441.1.html');
 //$files=array('4592.1.html');
+//$files=array('3928.1.html');
 
 $count = 1;
 
@@ -36,45 +37,83 @@ foreach ($files as $filename)
 			
 			$url = $a->href;
 			
-			$filename = str_replace('https://www.mapress.com/j/zt/article/view/zootaxa.', '', $url);
-			$filename .= '.html';
+			$ok = true;
 			
-			if (preg_match('/^(?<volume>\d+)\./', $filename, $m))
+			// https://www.mapress.com/j/zt/article/view/7515
+			if (preg_match('/view\/\d+$/', $url))
 			{
-				$volume = $m['volume'];
-				
-				// folder for volume
-				
-				$dir = $basedir . '/' . $volume ;
-				if (!file_exists($dir))
-				{
-					$oldumask = umask(0); 
-					mkdir($dir, 0777);
-					umask($oldumask);
-				}
-	
-				$filename = $dir . '/' . $filename;
-				
-				$article = get($url);
-			
-				file_put_contents($filename, $article);
-			
-				// Give server a break every 10 items
-				if (($count++ % 10) == 0)
-				{
-					$rand = rand(1000000, 3000000);
-					echo "\n ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
-					usleep($rand);
-				}
-				
-				
+				$ok = false;
 			}
-			else
+			
+			if (preg_match('/@/', $url))
 			{
-				echo "Problem\n";
-				exit();
+				$ok = false;
 			}
+
+			if (preg_match('/web.ebscohost.com/', $url))
+			{
+				$ok = false;
+			}
+			
+				
+			if ($ok)
+			{
+			
+				$filename = preg_replace('/https?:\/\/www.mapress.com\/j\/zt\/article\/view\/z?o?o+tr?[a|z]xz?a?\.?/i', '', $url);
+
+				$filename = preg_replace('/https?:\/\/www.mapress.com\/j\/zt\/article\/view\//i', '', $filename);
+				
+				// https://www.mapress.com/j/zt/article/view/1%E2%80%9391
+				$filename = urldecode($filename);
+				
+				$filename .= '.html';
+				
+				echo $filename . "\n";
+			
+				if (preg_match('/^(?<volume>\d+)(–\d+)?\.?/u', $filename, $m))
+				{
+					$volume = $m['volume'];
+				
+					// folder for volume
+				
+					$dir = $basedir . '/' . $volume ;
+					if (!file_exists($dir))
+					{
+						$oldumask = umask(0); 
+						mkdir($dir, 0777);
+						umask($oldumask);
+					}
 	
+					$filename = $dir . '/' . $filename;
+				
+					if (file_exists($filename))
+					{
+						echo "Have it\n";
+					}
+					else 
+					{
+				
+						$article = get($url);
+			
+						file_put_contents($filename, $article);
+			
+						// Give server a break every 10 items
+						if (($count++ % 10) == 0)
+						{
+							$rand = rand(1000000, 3000000);
+							echo "\n ...sleeping for " . round(($rand / 1000000),2) . ' seconds' . "\n\n";
+							usleep($rand);
+						}
+					}
+				
+				
+				}
+				else
+				{
+					echo "Problem\n";
+					exit();
+				}
+			}
 			
 		}
 		
