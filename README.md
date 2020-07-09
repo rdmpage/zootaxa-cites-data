@@ -9,21 +9,58 @@ https://twitter.com/egonwillighagen/status/1280068394990080000
 
 ### Step one: list of issues
 
-Fetch each page from [Zootaxa archives](https://www.mapress.com/j/zt/issue/archive) and save to ```html``` folder.
+Use `issues.php` Fetch each page from [Zootaxa archives](https://www.mapress.com/j/zt/issue/archive) and save to ```html``` folder.
 
 ### Step two: extract contents pages
 
-Parse each file in ```html``` and extract URL for each issue, fetch HTML for table of contents and save in ```contents```.
+Use `extract-contents.php` to parse each file in ```html``` and extract URL for each issue, fetch HTML for table of contents and save in ```contents```.
 
 ### Step three:
 
-Parse each table of contents, extract URL for each article, and save that in ```articles```.
+Use `extract-articles.php` to parse each table of contents, extract URL for each article, and save that in ```articles```.
 
 ### Step four: 
 
-Parse each article landing page and extract references as a text file, one reference per line.
+Use `extract-references.php` to parse each article landing page and extract references as a text file, one reference per line, then run [anystyle](https://anystyle.io) to parse the references and output in CSL JSON.
+
+### Step five:
+
+Use `convert-references.php` to parse text and CSL and generate TSV file of references. This file is structured like this:
+
+key | value
+--|--
+guid | DOI for Zootaxa article
+guid-date | Publication date for Zootaxa article
+CSL fields | value for CSL field, e.g. `title`, `volume`, etc.
+unstructured | original text of cited literature
+
+Each row is a single work that is cited, the `guid` field groups together works cited by the same Zootaxa article.
+
+### Step six:
+
+Use `export.php` to read TSV file and output RIS file.
 
 
+## Data
+
+Data is available in TSV and RIS formats.
+
+### Example SQL queries (MySQL)
+
+```
+-- count by Zootaxa article
+SELECT count(DISTINCT guid) FROM cites;
+SELECT count(DISTINCT guid) , SUBSTRING(`guid-date`, 1, 4) AS `year` FROM cites GROUP BY `year`;
+SELECT count(distinct guid) , SUBSTRING(`guid-date`, 1, 4) AS `year` FROM cites WHERE `container-title` = "Zootaxa" GROUP BY `year`;
+
+-- count total literature cited
+SELECT count(guid) FROM cites;
+SELECT count(guid), SUBSTRING(`guid-date`, 1, 4) AS `year` FROM cites GROUP BY `year`;
+SELECT count(guid) , SUBSTRING(`guid-date`, 1, 4) AS `year` FROM cites WHERE `container-title` = "Zootaxa" GROUP BY `year`;
+
+-- count literature cited by decade
+SELECT SUBSTRING(issued,1,3) as decade, count(guid) FROM cites WHERE issued REGEXP '^[0-9]{4}$' GROUP BY decade;
+```
 
 
 ## Anystyle
