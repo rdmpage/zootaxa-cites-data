@@ -22,6 +22,7 @@ $keys = array('guid', 'author', 'title', 'container-title', 'type', 'volume', 'i
 // Keys we will export
 $keys = array(
 	'guid', 
+	'guid-date',
 	'author', 
 	'title', 
 	'container-title', 
@@ -67,6 +68,9 @@ foreach ($files1 as $directory)
 				// Get DOI of citing article from HTML
 				$guid = $base_filename;
 				
+				// date of publication of citing article
+				$guid_date = "";
+				
 				$html_filename = $base_filename . '.html';				
 				$html = file_get_contents($sourcedir . '/' . $directory . '/' . $html_filename);
 				$dom = HtmlDomParser::str_get_html($html);				
@@ -78,6 +82,10 @@ foreach ($files1 as $directory)
 					{
 						case 'DC.Identifier.DOI':
 							$guid = $meta->content;
+							break;
+
+						case 'DC.Date.issued':
+							$guid_date = $meta->content;
 							break;
 							
 						default:
@@ -135,6 +143,9 @@ foreach ($files1 as $directory)
 						
 						// So we know what article cites these papers						
 						$reference->guid = $guid;
+						
+						// So we know what date citing paper was published
+						$reference->{'guid-date'} = $guid_date;
 						
 						if ($num_rows == $num_refs)
 						{
