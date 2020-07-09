@@ -14,14 +14,35 @@ $sourcedir = dirname(__FILE__) . '/articles';
 $files1 = scandir($sourcedir);
 
 // debugging
-//$files2=array('2441.1.1.html');
+//$files1 = array('2441');
 
-$count = 1;
 
-$files1 = scandir($sourcedir);
+$keys = array('guid', 'author', 'title', 'container-title', 'type', 'volume', 'issue', 'issued', 'page', 'publisher', 'publisher-place', 'editor', 'edition', 'genre', 'note', 'director', 'producer', 'collection-title', 'citation-number', 'translator', 'source', 'URL', 'DOI', 'PMID', 'PMCID', 'isbn', 'medium');
 
-$keys = array('guid', 'author', 'title', 'container-title', 'type', 'volume', 'issue', 'issued', 'page', 'publisher', 'publisher-place', 'editor', 'edition', 'genre', 'note', 'director', 'source', 'URL', 'DOI', 'PMID', 'PMCID');
+// Keys we will export
+$keys = array(
+	'guid', 
+	'author', 
+	'title', 
+	'container-title', 
+	'type', 
+	'volume', 
+	'issue', 
+	'page', 
+	'issued', 
+	'publisher', 
+	'publisher-place', 
+	'editor', 
+	'URL', 
+	'DOI', 
+	'PMID', 
+	'PMCID', 
+	'isbn',
+	'note',
+	'unstructured'
+	);
 
+// Header row for TSV file
 echo join("\t", $keys) . "\n";
 
 
@@ -39,26 +60,17 @@ foreach ($files1 as $directory)
 			//echo $filename . "\n";
 			if (preg_match('/\.json$/', $filename))
 			{
+				// Get CSL file and extract individual references
+			
 				$base_filename = str_replace('.json', '', $filename);
 			
-				// Get DOI of article 
+				// Get DOI of citing article from HTML
 				$guid = $base_filename;
 				
-				$html_filename = $base_filename . '.html';
-				
+				$html_filename = $base_filename . '.html';				
 				$html = file_get_contents($sourcedir . '/' . $directory . '/' . $html_filename);
-			
-				$dom = HtmlDomParser::str_get_html($html);
-				
+				$dom = HtmlDomParser::str_get_html($html);				
 				$metas = $dom->find('meta');
-				
-				/*
-				foreach ($metas as $meta)
-				{
-					echo $meta->name . " " . $meta->content . "\n";
-				}
-				*/
-				
 
 				foreach ($metas as $meta)
 				{
@@ -72,7 +84,11 @@ foreach ($files1 as $directory)
 							break;
 					}
 				}
-			
+				
+				// Get text of references
+				$text_filename = $base_filename . '.txt';
+				$text = file_get_contents($sourcedir . '/' . $directory . '/' . $text_filename);
+
 				// Get CSL JSON and convert to tab delimited row
 				$json = file_get_contents($sourcedir . '/' . $directory . '/' . $filename);
 				
@@ -82,27 +98,50 @@ foreach ($files1 as $directory)
 				
 				if ($references)
 				{
+					// We also want to store unstructured text so that we can reparse if needed
+					$text = preg_replace("/\x{0A}(\x{0A})+/", "\n", $text);
+					$text = preg_replace("/^\x{0A}/", "", $text);
+					$text = preg_replace("/\x{0A}$/", "", $text);
 					
+					$text = preg_replace("/\x{0D}$/", "", $text);
 					
+					// Text may have blacnk lines, which anystyle will skip, so make sure
+					// we have same number of lines so we can match up strings and refs
+					// echo "\n----\n$text\n----\n";
+					$rows = explode("\n", $text);
+					$num_rows = count($rows);
+					$num_refs = count($references);
+					
+					// echo "Rows: $num_rows $num_refs\n";
+					
+					$count = 0;
+										
 					foreach ($references as $reference)
 					{
 						//print_r($reference);	
 						
-						// learn
+						// learn new terms (only use in early stages as we get familiar
+						// with anystyle )
 						foreach ($reference as $k => $v)				
 						{
 							if (!in_array($k, $keys))
 							{
-								echo "$k no found\n";
-								exit();
+								//echo "$k not found\n";
+								//exit();
 							}
 						}					
 					
 						$values = array();
 						
-						// So we know who cites these papers
-						
+						// So we know what article cites these papers						
 						$reference->guid = $guid;
+						
+						if ($num_rows == $num_refs)
+						{
+							// No ambiguity in what reference matches what string, 
+							// so unparsed string so we can check later
+							$reference->unstructured = $rows[$count];
+						}
 					
 						foreach ($keys as $k)
 						{
@@ -136,17 +175,13 @@ foreach ($files1 as $directory)
 								$values[] = "";
 							}
 						}
-						
-						
+												
 						echo join("\t", $values) . "\n";
+						
+						$count++;
 					}
-				
-				
+								
 				}
-
-	
-				
-			
 
 			}
 		}
