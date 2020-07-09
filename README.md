@@ -3,8 +3,27 @@
 Data on what articles Zootaxa cites.
 
 
-
 https://twitter.com/egonwillighagen/status/1280068394990080000
+
+## Harvesting Zootaxa
+
+### Step one: list of issues
+
+Fetch each page from [Zootaxa archives](https://www.mapress.com/j/zt/issue/archive) and save to ```html``` folder.
+
+### Step two: extract contents pages
+
+Parse each file in ```html``` and extract URL for each issue, fetch HTML for table of contents and save in ```contents```.
+
+### Step three:
+
+Parse each table of contents, extract URL for each article, and save that in ```articles```.
+
+### Step four: 
+
+Parse each article landing page and extract references as a text file, one reference per line.
+
+
 
 
 ## Anystyle
@@ -40,7 +59,8 @@ source ~/.bash_profile
 Now we can install ```anystyle``` … but it doesn’t work. We need to add gems to our path (see https://stackoverflow.com/a/14138490/9684):
 
 ```
-export PATH=/usr/local/lib/ruby/gems/2.7.0/bin:$PATH
+echo 'export PATH="/usr/local/lib/ruby/gems/2.7.0/bin:$PATH"' >> /Users/rpage/.bash_profile
+
 source ~/.bash_profile
 ```
 

@@ -13,12 +13,12 @@ $sourcedir = dirname(__FILE__) . '/articles';
 
 $files1 = scandir($sourcedir);
 
+//$files1 = array('1026');
+
 // debugging
-//$files2=array('2441.1.1.html');
 
 $count = 1;
 
-$files1 = scandir($sourcedir);
 
 foreach ($files1 as $directory)
 {
@@ -72,6 +72,9 @@ foreach ($files1 as $directory)
 				file_put_contents($textfilename, $text);
 				
 				$command = 'anystyle -f csl parse ' . $textfilename . ' > ' . $jsonfilename;
+				
+				echo $command . "\n";
+								
 				system($command);
 				
 			
