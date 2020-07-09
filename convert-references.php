@@ -7,9 +7,10 @@ require_once(dirname(__FILE__) . '/lib.php');
 require_once 'vendor/autoload.php';
 use Sunra\PhpSimple\HtmlDomParser;
 
-
-$basedir = dirname(__FILE__) . '/articles';
 $sourcedir = dirname(__FILE__) . '/articles';
+$sourcedir = '/Volumes/Samsung_T5/zootaxa-cites-data/articles';
+
+
 
 $files1 = scandir($sourcedir);
 
@@ -21,6 +22,7 @@ $keys = array('guid', 'author', 'title', 'container-title', 'type', 'volume', 'i
 
 // Keys we will export
 $keys = array(
+    'id',
 	'guid', 
 	'guid-date',
 	'author', 
@@ -46,6 +48,7 @@ $keys = array(
 // Header row for TSV file
 echo join("\t", $keys) . "\n";
 
+$count = 1;
 
 foreach ($files1 as $directory)
 {
@@ -122,7 +125,7 @@ foreach ($files1 as $directory)
 					
 					// echo "Rows: $num_rows $num_refs\n";
 					
-					$count = 0;
+					
 										
 					foreach ($references as $reference)
 					{
@@ -140,6 +143,8 @@ foreach ($files1 as $directory)
 						}					
 					
 						$values = array();
+						
+						$reference->id = $count;
 						
 						// So we know what article cites these papers						
 						$reference->guid = $guid;

@@ -4,7 +4,7 @@
 
 	
 $ris_key_map = array(
-	
+	'id'				=> 'ID',
 	'title'				=> 'TI', 
 	'container-title'	=> 'JO', 
 	'volume'			=> 'VL', 
