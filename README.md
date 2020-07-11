@@ -2,8 +2,11 @@
 
 Data on what articles Zootaxa cites.
 
+> “what if we had open citations, and everyone could see the citation network in full, and not collapsed on a single number? 50 years ago, the JIF was the bandwidth we had. We have 30 yrs of internet now.” [Egon Willighⓐgen](https://twitter.com/egonwillighagen/status/1280068394990080000)
 
-https://twitter.com/egonwillighagen/status/1280068394990080000
+## Data
+
+Data generated is available on FigShare [doi:10.6084/m9.figshare.c.5054372.v2](https://doi.org/10.6084/m9.figshare.c.5054372.v2)
 
 ## Harvesting Zootaxa
 
@@ -29,6 +32,7 @@ Use `convert-references.php` to parse text and CSL and generate TSV file of refe
 
 key | value
 --|--
+id | integer counter 1,2,…,n so that each reference string has unique id
 guid | DOI for Zootaxa article
 guid-date | Publication date for Zootaxa article
 CSL fields | value for CSL field, e.g. `title`, `volume`, etc.

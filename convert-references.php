@@ -48,7 +48,7 @@ $keys = array(
 // Header row for TSV file
 echo join("\t", $keys) . "\n";
 
-$count = 1;
+$row_count = 1;
 
 foreach ($files1 as $directory)
 {
@@ -125,8 +125,8 @@ foreach ($files1 as $directory)
 					
 					// echo "Rows: $num_rows $num_refs\n";
 					
+					$ref_count = 0;
 					
-										
 					foreach ($references as $reference)
 					{
 						//print_r($reference);	
@@ -144,7 +144,7 @@ foreach ($files1 as $directory)
 					
 						$values = array();
 						
-						$reference->id = $count;
+						$reference->id = $row_count;
 						
 						// So we know what article cites these papers						
 						$reference->guid = $guid;
@@ -156,7 +156,7 @@ foreach ($files1 as $directory)
 						{
 							// No ambiguity in what reference matches what string, 
 							// so unparsed string so we can check later
-							$reference->unstructured = $rows[$count];
+							$reference->unstructured = $rows[$ref_count];
 						}
 					
 						foreach ($keys as $k)
@@ -194,7 +194,9 @@ foreach ($files1 as $directory)
 												
 						echo join("\t", $values) . "\n";
 						
-						$count++;
+						$ref_count++; // number of references in this article
+						
+						$row_count++; // total number of references in entire journal
 					}
 								
 				}
