@@ -57,6 +57,8 @@ foreach ($files1 as $directory)
 					}
 					else
 					{
+						// https://stackoverflow.com/a/18992691/9684
+						$text = preg_replace('/\R/u', ' ', $text);					
 						$references[] = $text;
 					}
 					
