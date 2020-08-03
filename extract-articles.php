@@ -8,6 +8,8 @@ require_once 'vendor/autoload.php';
 use Sunra\PhpSimple\HtmlDomParser;
 
 
+$use_biotaxa = true; // Sometimes www.mapress.com doesn't have refs but www.biotaxa.org does!?
+
 $basedir = dirname(__FILE__) . '/articles';
 $sourcedir = dirname(__FILE__) . '/contents';
 
@@ -17,6 +19,8 @@ $files = scandir($sourcedir);
 //$files=array('2441.1.html');
 //$files=array('4592.1.html');
 //$files=array('3928.1.html');
+
+$files=array('3905.1.html');
 
 $count = 1;
 
@@ -58,7 +62,8 @@ foreach ($files as $filename)
 				
 			if ($ok)
 			{
-			
+				echo $url . "\n";
+				
 				$filename = preg_replace('/https?:\/\/www.mapress.com\/j\/zt\/article\/view\/z?o?o+tr?[a|z]xz?a?\.?/i', '', $url);
 
 				$filename = preg_replace('/https?:\/\/www.mapress.com\/j\/zt\/article\/view\//i', '', $filename);
@@ -92,6 +97,10 @@ foreach ($files as $filename)
 					}
 					else 
 					{
+						if ($use_biotaxa)
+						{
+							$url = preg_replace('/https?:\/\/www.mapress.com\/j\/zt\//', 'https://www.biotaxa.org/Zootaxa/', $url);
+						}				
 				
 						$article = get($url);
 			
