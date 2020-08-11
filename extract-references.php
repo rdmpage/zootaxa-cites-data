@@ -15,6 +15,8 @@ $files1 = scandir($sourcedir);
 
 //$files1 = array('1026');
 
+//$files1 = array('3904');
+
 // debugging
 
 $count = 1;
