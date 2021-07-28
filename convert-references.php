@@ -15,7 +15,7 @@ $sourcedir = '/Volumes/Samsung_T5/zootaxa-cites-data/articles';
 $files1 = scandir($sourcedir);
 
 // debugging
-// $files1 = array('2134');
+//$files1 = array('1409');
 
 $keys = array('guid', 'author', 'title', 'container-title', 'type', 'volume', 'issue', 'issued', 'page', 'publisher', 'publisher-place', 'editor', 'edition', 'genre', 'note', 'director', 'producer', 'collection-title', 'citation-number', 'translator', 'source', 'URL', 'DOI', 'PMID', 'PMCID', 'isbn', 'medium');
 
@@ -73,7 +73,7 @@ foreach ($files1 as $directory)
 		
 		$files2 = scandir($sourcedir . '/' . $directory);
 		
-		// $files2 = array('2134.1.4.json');
+		//$files2 = array('1409.1.1.json');
 
 		foreach ($files2 as $filename)
 		{
@@ -138,9 +138,18 @@ foreach ($files1 as $directory)
 					$text = preg_replace("/\x{0A}$/", "", $text);
 					
 					$text = preg_replace("/\x{0D}$/", "", $text);
+					$text = preg_replace("/\x{0D}\x{0A}\s*/", "\n", $text);
 					
 					// blank lines
 					$text = preg_replace("/\x{0A}(\x{20}\x{0A})+/", "\n", $text);
+					
+					$text = preg_replace("/\n\n+/", "\n", $text);
+					
+					if (0)
+					{
+						echo $text;
+						echo "\n";
+					}
 										
 					// Text may have blacnk lines, which anystyle will skip, so make sure
 					// we have same number of lines so we can match up strings and refs
