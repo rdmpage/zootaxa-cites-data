@@ -4,7 +4,15 @@
 
 require_once(dirname(__FILE__) . '/lib.php');
 
-require_once 'vendor/autoload.php';
+if (1)
+{
+	require_once (dirname(__FILE__) . '/HtmlDomParser.php');
+}
+else
+{
+	require_once (dirname(__FILE__) . '/vendor/autoload.php');
+}
+
 use Sunra\PhpSimple\HtmlDomParser;
 
 $use_biotaxa = false; // Use mapress.com by default

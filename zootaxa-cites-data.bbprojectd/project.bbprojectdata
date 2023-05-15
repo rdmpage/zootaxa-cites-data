@@ -7,7 +7,7 @@
 		<string>3CB6C944-8676-4E67-8850-30CD98F72EFB</string>
 		<string>0D80C644-8595-4492-A96E-F99344F0468B</string>
 		<string>DE8E5C0B-76D4-4C30-A2FE-F970A2402999</string>
-		<string>848104AA-35EC-4384-A69C-B47F9A3DB01B</string>
+		<string>28C4C504-D06A-43D4-882B-BA7439AE6503</string>
 		<string>52D716EF-1CE0-4496-A6EE-A227BA65827D</string>
 		<string>40688BE5-6FB2-47FF-B609-2593CAC3E472</string>
 		<string>18149936-D01C-43AF-AF2B-B0720BC60C5B</string>
@@ -167,6 +167,55 @@
 			<key>UserOverrideItemName</key>
 			<true/>
 		</dict>
+		<key>28C4C504-D06A-43D4-882B-BA7439AE6503</key>
+		<dict>
+			<key>ItemData</key>
+			<dict>
+				<key>BookmarkData</key>
+				<data>
+				Ym9va/wCAAAAAAQQMAAAAH93Ka3PtCSRpejyY2z/gHVw
+				wayyGpaBIZSt+hMsR1oH+AEAAAQAAAADAwAAAAgAKAUA
+				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAACwAA
+				AAEBAABEZXZlbG9wbWVudAASAAAAAQEAAHpvb3RheGEt
+				Y2l0ZXMtZGF0YQAAFgAAAAEBAABjb252ZXJ0LXJlZmVy
+				ZW5jZXMucGhwAAAUAAAAAQYAABAAAAAgAAAAMAAAAEQA
+				AABgAAAACAAAAAQDAACEXAAAAAAAAAgAAAAEAwAAlsYD
+				AAAAAAAIAAAABAMAAFkpJQAAAAAACAAAAAQDAAAQIGwE
+				AAAAAAgAAAAEAwAAtjdsBAAAAAAUAAAAAQYAAJwAAACs
+				AAAAvAAAAMwAAADcAAAACAAAAAAEAABBxP1RcHUO1RgA
+				AAABAgAAAQAAAAAAAAAPAAAAAAAAAAAAAAAAAAAACAAA
+				AAQDAAADAAAAAAAAAAQAAAADAwAA9QEAAAgAAAABCQAA
+				ZmlsZTovLy8MAAAAAQEAAE1hY2ludG9zaCBIRAgAAAAE
+				AwAAAJCClucAAAAIAAAAAAQAAEHEf2qigAAAJAAAAAEB
+				AABFRURCQzQ5NS1ERjUyLTQ1NkEtQjQzMS1GQjYwN0JG
+				MDRBRDEYAAAAAQIAAIEAAAABAAAA7xMAAAEAAAAAAAAA
+				AAAAAAEAAAABAQAALwAAAAAAAAABBQAAzAAAAP7///8B
+				AAAAAAAAABAAAAAEEAAAgAAAAAAAAAAFEAAA7AAAAAAA
+				AAAQEAAAGAEAAAAAAABAEAAACAEAAAAAAAACIAAA5AEA
+				AAAAAAAFIAAAVAEAAAAAAAAQIAAAZAEAAAAAAAARIAAA
+				mAEAAAAAAAASIAAAeAEAAAAAAAATIAAAiAEAAAAAAAAg
+				IAAAxAEAAAAAAAAwIAAA8AEAAAAAAAABwAAAOAEAAAAA
+				AAARwAAAIAAAAAAAAAASwAAASAEAAAAAAAAQ0AAABAAA
+				AAAAAAA=
+				</data>
+				<key>FileURL</key>
+				<string>file:///Users/rpage/Development/zootaxa-cites-data/convert-references.php</string>
+				<key>HasSecurityScope</key>
+				<true/>
+				<key>RelativePath</key>
+				<string>./convert-references.php</string>
+				<key>TypeID</key>
+				<string>_CFileLocator</string>
+				<key>Version</key>
+				<integer>1</integer>
+			</dict>
+			<key>ItemName</key>
+			<string>convert-references.php</string>
+			<key>ItemType</key>
+			<string>FileReference</string>
+			<key>UserOverrideItemName</key>
+			<true/>
+		</dict>
 		<key>3CB6C944-8676-4E67-8850-30CD98F72EFB</key>
 		<dict>
 			<key>ItemData</key>
@@ -310,53 +359,6 @@
 			</dict>
 			<key>ItemName</key>
 			<string>export.php</string>
-			<key>ItemType</key>
-			<string>FileReference</string>
-		</dict>
-		<key>848104AA-35EC-4384-A69C-B47F9A3DB01B</key>
-		<dict>
-			<key>ItemData</key>
-			<dict>
-				<key>BookmarkData</key>
-				<data>
-				Ym9vawQDAAAAAAQQMAAAAHcuM3xKfLKA0Bhvj6Pwg6hH
-				rPEW7ABaJMSxPWnzRwgY9AEAAAQAAAADAwAAAAgAKAUA
-				AAABAQAAVXNlcnMAAAAFAAAAAQEAAHJwYWdlAAAABgAA
-				AAEBAAAuVHJhc2gAABoAAAABAQAAY29udmVydC1yZWZl
-				cmVuY2VzLW9sZC5waHAAABAAAAABBgAAEAAAACAAAAAw
-				AAAAQAAAAAgAAAAEAwAAEGcCAAAAAAAIAAAABAMAAIV0
-				DQAAAAAACAAAAAQDAADAFmAHAwAAAAgAAAAEAwAAm2xG
-				BAMAAAAQAAAAAQYAAHwAAACMAAAAnAAAAKwAAAAIAAAA
-				AAQAAEG/vaJQAAAAGAAAAAECAAABAAAAAAAAAA8AAAAA
-				AAAAAAAAAAAAAAAIAAAABAMAAAIAAAAAAAAABAAAAAMD
-				AAD1AQAACAAAAAEJAABmaWxlOi8vLwwAAAABAQAATWFj
-				aW50b3NoIEhECAAAAAQDAAAA4AQDaQAAAAgAAAAABAAA
-				Qb7dXWIAAAAkAAAAAQEAADI1RTQyODZELTcxMkMtMzg5
-				OS1CNDNGLTVEM0Y2QThCRDEyMRgAAAABAgAAgQAAAAEA
-				AADvEwAAAQAAAAAAAAAAAAAAAQAAAAEBAAAvAAAAAAAA
-				AAEFAAAaAAAAAQEAAE5TVVJMRG9jdW1lbnRJZGVudGlm
-				aWVyS2V5AAAEAAAAAwMAAGlaAQDYAAAA/v///wEAAAAA
-				AAAAEQAAAAQQAABkAAAAAAAAAAUQAAC8AAAAAAAAABAQ
-				AADkAAAAAAAAAEAQAADUAAAAAAAAAAIgAACwAQAAAAAA
-				AAUgAAAgAQAAAAAAABAgAAAwAQAAAAAAABEgAABkAQAA
-				AAAAABIgAABEAQAAAAAAABMgAABUAQAAAAAAACAgAACQ
-				AQAAAAAAADAgAAC8AQAAAAAAAAHAAAAEAQAAAAAAABHA
-				AAAgAAAAAAAAABLAAAAUAQAAAAAAABDQAAAEAAAAAAAA
-				AMQBAIDoAQAAAAAAAA==
-				</data>
-				<key>FileURL</key>
-				<string>file:///Users/rpage/.Trash/convert-references-old.php</string>
-				<key>HasSecurityScope</key>
-				<true/>
-				<key>RelativePath</key>
-				<string>../../.Trash/convert-references-old.php</string>
-				<key>TypeID</key>
-				<string>_CFileLocator</string>
-				<key>Version</key>
-				<integer>1</integer>
-			</dict>
-			<key>ItemName</key>
-			<string>convert-references-old.php</string>
 			<key>ItemType</key>
 			<string>FileReference</string>
 		</dict>

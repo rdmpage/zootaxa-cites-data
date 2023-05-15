@@ -4,13 +4,19 @@
 
 require_once(dirname(__FILE__) . '/lib.php');
 
-require_once 'vendor/autoload.php';
+if (1)
+{
+	require_once (dirname(__FILE__) . '/HtmlDomParser.php');
+}
+else
+{
+	require_once (dirname(__FILE__) . '/vendor/autoload.php');
+}
+
 use Sunra\PhpSimple\HtmlDomParser;
 
 $sourcedir = dirname(__FILE__) . '/articles';
-$sourcedir = '/Volumes/Samsung_T5/zootaxa-cites-data/articles';
-
-
+//$sourcedir = '/Volumes/Samsung_T5/zootaxa-cites-data/articles';
 
 $files1 = scandir($sourcedir);
 
