@@ -25,6 +25,10 @@ $files1 = scandir($sourcedir);
 
 //$files1 = array('3904');
 
+//$files1 = array('270');
+//$files1 = array('4162');
+//$files1 = array('1342');
+
 // debugging
 
 $count = 1;
@@ -38,6 +42,8 @@ foreach ($files1 as $directory)
 		//echo $directory . "\n";
 		
 		$files2 = scandir($sourcedir . '/' . $directory);
+		
+		//$files2 = ['1342.1.1.html'];
 
 		foreach ($files2 as $filename)
 		{
@@ -47,8 +53,29 @@ foreach ($files1 as $directory)
 				$base_filename = str_replace('.html', '', $filename);
 			
 				$html = file_get_contents($sourcedir . '/' . $directory . '/' . $filename);
+				
+				$pid = '';
 			
 				$dom = HtmlDomParser::str_get_html($html);
+				
+				foreach ($dom->find('meta') as $meta)
+				{		
+					switch ($meta->name)
+					{				
+						case 'citation_doi':
+							$pid = $meta->content;
+							break;
+							
+						default:
+							break;
+					}
+				}
+				
+				if ($pid == '')
+				{
+					// make up DOI based on file name
+					$pid = '10.11646/zootaxa.' . $base_filename;
+				}
 				
 				//echo $html;
 				
@@ -76,21 +103,43 @@ foreach ($files1 as $directory)
 				
 				print_r($references);
 				
-				$text = join("\n",$references);
-				
+				$text = join("\n",$references);					
 				$textfilename = $sourcedir . '/' . $directory . '/' . $base_filename . '.txt';
-				$jsonfilename = $sourcedir . '/' . $directory . '/' . $base_filename . '.json';
+				file_put_contents($textfilename, $text);		
 				
-				file_put_contents($textfilename, $text);
+				$jsonfilename = $sourcedir . '/' . $directory . '/' . $base_filename . '.json';		
 				
-				$command = 'anystyle -f csl parse ' . $textfilename . ' > ' . $jsonfilename;
+				if (0)
+				{					
+					$command = 'anystyle -f csl parse ' . $textfilename . ' > ' . $jsonfilename;
 				
-				echo $command . "\n";
+					echo $command . "\n";
 								
-				system($command);
-				
-			
-
+					system($command);
+				}
+				else
+				{					
+					// use my parser
+					$url = 'http://localhost/citation-parsing/api.php';
+					
+					$json = post($url, $text);
+					
+					$obj = json_decode($json);
+					
+					foreach ($obj as $index => &$csl)
+					{
+						// add identifier
+						$csl->id = $pid . '#row=' . $index;
+						
+						// add reference
+						$citing_work = new stdclass;
+						$citing_work->DOI = $pid;
+						
+						$csl->{'is-referenced-by'} = [$citing_work];						
+					}
+										
+					file_put_contents($jsonfilename, json_encode($obj, JSON_UNESCAPED_SLASHES | JSON_UNESCAPED_UNICODE | JSON_INVALID_UTF8_SUBSTITUTE));
+				}
 			}
 		}
 	}
